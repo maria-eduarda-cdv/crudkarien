@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Lista de Tarefas</h1>
+  
+    <h2>Criar Nova Tarefa</h2>
+    <form action="/items" method="POST">
+      <input type="text" name="name" placeholder="Nome" required>
+      <input type="text" name="description" placeholder="Descrição">
+      <button type="submit">Criar</button>
+    </form>
+    <ul>
+      <% items.forEach(item => { %>
+        <li>
+          <strong><%= item.name %>:</strong> <%= item.description %>
+          <a class="edit" href="/items/<%= item._id %>/edit">Editar</a>
+          <form action="/items/<%= item._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button class="delet" type="submit">Deletar</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>
